@@ -12,4 +12,8 @@ class HomeController extends Controller
     public function actionIndex(){
         return view('admin.index');
     }
+    //后台欢迎页
+    public function actionWelcome(){
+        return view('admin.welcome');
+    }
 }

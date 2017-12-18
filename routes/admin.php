@@ -8,5 +8,6 @@ Route::group(['namespace' => 'Admin'], function () {
     //需要登录的路由
     Route::group(['middleware' => 'admin.login'], function () {
         Route::get('/index', 'HomeController@actionIndex')->name('admin');//后台首页
+        Route::get('/welcome', 'HomeController@actionWelcome');//后台欢迎页
     });
 });
