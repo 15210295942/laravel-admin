@@ -13,7 +13,7 @@
     {{--<link rel="icon" href="favicon.ico">  标题栏小图标--}}
     <link rel="stylesheet" href="{{ asset('plugin/layui/css/layui.css') }}" media="all" />
     <link rel="stylesheet" href="{{ asset('admin/css/font_eolqem241z66flxr.css') }}" media="all" />
-    <link rel="stylesheet" href="{{ asset('static/css/main.css') }}" media="all" />
+    <link rel="stylesheet" href="{{ asset('admin/css/main.css') }}" media="all" />
 </head>
 <body class="main_body">
 <div class="layui-layout layui-layout-admin">
@@ -107,7 +107,7 @@
 <script type="text/javascript" src="{{ asset('plugin/layui/layui.js') }}"></script>
 <script type="text/javascript" src="{{ asset('admin/js/nav.js') }}"></script>
 <script type="text/javascript" src="{{ asset('admin/js/leftNav.js') }}"></script>
-<script type="text/javascript" src="{{ asset('static/js/index.js') }}"></script>
+<script type="text/javascript" src="{{ asset('admin/js/index.js') }}"></script>
 <script type="text/javascript"  src="//idm-su.baidu.com/su.js"></script>
 </body>
 </html>
