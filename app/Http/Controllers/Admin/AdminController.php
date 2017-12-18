@@ -38,6 +38,11 @@ class AdminController extends Controller
     {
         $userName = $request->input('uname');
         $psw = $request->input('psw');
+        $codeGoogle = $request->input('codeGoogle');
+        $checkCodeGoogle = $request->session()->get('codeGoogle');
+        if($codeGoogle != $checkCodeGoogle){
+            throw new ParamsException('请输入正确的验证码');
+        }
         if (!$userName || !$psw) {
             throw new ParamsException('请输入用户名和密码');
         }

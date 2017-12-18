@@ -1,0 +1,138 @@
+/*聊天主页面*/
+.chatwindow{
+    width: 90%;
+    height: 100%;
+    border: 1px solid;
+    border-color: #00BFFF;
+    margin-left: 10%;
+}
+/* 消息来源*/
+#from{
+    color: #F7F7F7;
+    line-height: 270%;
+    font-size: 16px;
+}
+.fromDiv{
+    width: 100%;
+    height: 5%;
+    background-color: #00BFFF;
+}
+/*表情,图片,文件*/
+.epf{
+    width: 100%;
+    height: 4.3%;
+    background-color: white;
+    border-top: 1px solid;
+    border-top-color: #00BFFF;
+    border-bottom: 1px solid;
+    border-bottom-color: #00BFFF;
+}
+/*消息记录*/
+#content{
+    width: 100%;
+    height: 70%;
+    overflow:auto;
+}
+/*消息输入框*/
+.inputMessage{
+    width: 100%;
+    height: 15.7%;
+    background-color: white;
+}
+#message{
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    border-top: 1px;
+    border-top-color: #00BFFF;
+    border-bottom: 1px solid;
+    border-bottom-color: #00BFFF;
+    border-left: 1px ;
+    border-left-color: #00BFFF;
+}
+/*发送按钮*/
+.sendMessage{
+    width: 100%;
+    height: 5%;
+    background-color: white;
+    float: right;
+}
+.sendMessage2{
+    width: 80px;
+    height: 30px;
+    float: right;
+    margin-top: 5px;
+    margin-right: 5px;
+}
+/*头像*/
+.touxiangRight{
+    border-radius:100%;
+    float:right;
+    width:40px;
+    height:40px;
+    background-image:url(../images/头像.png);
+    background-size:100% 100%
+}
+.touxiangLeft{
+    border-radius:100%;
+    float:left;
+    width:40px;
+    height:40px;
+    background-image:url(../images/头像.png);
+    background-size:100% 100%
+}
+/*发送人和发送时间*/
+.titleRight{
+    text-align: right;
+    font-weight: bold;
+}
+.titleLeft{
+    text-align: left;
+    font-weight: bold;
+}
+/*发送图片消息*/
+.myImg{
+    width: 300px;
+    height: 200px;
+}
+/*清除浮动*/
+.clearFloat{
+    clear: both;
+}
+/**/
+.pLeft{
+    float:left;
+}
+.pRight{
+    float:right;
+}
+/*发送文件消息*/
+.postFile{
+    width:200px;
+    height:84px;
+    background-color:#87CEFA;
+    border-radius:4px;
+    float:right;
+}
+.getFile{
+    width:200px;
+    height:84px;
+    background-color:#87CEFA;
+    border-radius:4px;
+    float:left;
+}
+/**/
+.filenameRight{
+    text-align: right
+}
+.filenameLeft{
+    text-align: left
+}
+.filenameCenter{
+    text-align: center;
+    color: white;
+}
+/*去除超链接下划线*/
+.mya{
+    text-decoration:none;
+}

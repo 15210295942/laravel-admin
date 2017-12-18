@@ -60,6 +60,11 @@ class RouteServiceProvider extends ServiceProvider
             ->middleware('web')
             ->namespace($this->namespace)
             ->group(base_path('routes/admin.php'));
+        //插件路由
+        Route::prefix('tools')
+            ->middleware('web')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/tools.php'));
     }
 
     /**

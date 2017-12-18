@@ -3,32 +3,21 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>超的博客</title>
-    <!--                       CSS                       -->
-    <!-- Reset Stylesheet -->
-    <link rel="stylesheet" href="{{ asset('admin/css/reset.css') }}" type="text/css" media="screen"/>
-    <!-- Main Stylesheet -->
-    <link rel="stylesheet" href="{{ asset('admin/css/style.css') }}" type="text/css" media="screen"/>
-    <!-- Invalid Stylesheet. This makes stuff look pretty. Remove it if you want the CSS completely valid -->
-    <link rel="stylesheet" href="{{ asset('admin/css/invalid.css') }}" type="text/css" media="screen"/>
-    <!--                       Javascripts                       -->
+    <title>不爱吃鱼的猫</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="{{asset('plugin/layui/css/layui.css')}}" media="all"/>
+    <link rel="stylesheet" href="{{asset('admin/css/login.css')}}"/>
     <!-- jQuery -->
     <script type="text/javascript" src="{{ asset('admin/scripts/jquery.min.js') }}"></script>
-    <!-- jQuery Configuration -->
-    <script type="text/javascript" src="{{ asset('admin/scripts/simpla.jquery.configuration.js') }}"></script>
-    <!-- Facebox jQuery Plugin -->
-    <script type="text/javascript" src="{{ asset('admin/scripts/facebox.js') }}"></script>
-    <!-- jQuery WYSIWYG Plugin -->
-    <script type="text/javascript" src="{{ asset('admin/scripts/jquery.wysiwyg.js') }}"></script>
     <script type="text/javascript" src="{{ asset('admin/scripts/http.js') }}"></script>
     <style>
-        #loading{
-            background-color: rgba(0,0,0,.5);
+        #loading {
+            background-color: rgba(0, 0, 0, .5);
             position: fixed;
             width: 100%;
             height: 100%;
-            top:0;
-            left:0;
+            top: 0;
+            left: 0;
             z-index: 1;
             background-image: url({{ asset('admin/images/loading.gif') }});
             background-repeat: no-repeat;
@@ -38,58 +27,61 @@
         }
     </style>
 </head>
-<body id="login">
-<div id="login-wrapper" class="png_bg">
-    <div id="login-top">
-        <h1>博客后台</h1>
-        <!-- Logo (221px width) -->
-        <a href="#"><img id="logo" style="width: 150px;" src="{{--{{ asset('admin/images/logo.png') }}--}}"
-                         alt="Simpla Admin logo"/></a></div>
-    <!-- End #logn-top -->
-    <div id="login-content">
-        <form method="POST" action="javascript:;" >
-            <div class="notification information png_bg hide" style="display: none;">
-                <div> Just click "Sign In". No password needed.</div>
+<body class="beg-login-bg">
+<div class="beg-login-box">
+    <header>
+        <h1>管理登录</h1>
+    </header>
+    <div class="beg-login-main">
+        <form action="javascript:;" class="layui-form" method="post">
+            <div class="layui-form-item">
+                <label class="beg-login-icon">
+                    <i class="layui-icon">&#xe612;</i>
+                </label>
+
+                <input type="text" name="userName" value="" autocomplete="off" placeholder="请输入登录名" class="layui-input">
             </div>
-            <p>
-                <label>用户名</label>
-                <input name="userName" class="text-input" type="text"/>
-            </p>
-            <div class="clear"></div>
-            <p>
-                <label>密码</label>
-                <input name="psw" class="text-input" type="password"/>
-            </p>
-            <div class="clear"></div>
-            <p id="remember-password" style="display: none;">
-                <input type="checkbox"/>
-                Remember me </p>
-            <div class="clear"></div>
-            <p>
-                <input id="submit-btn" class="button" type="submit" value="登录"/>
-            </p>
+            <div class="layui-form-item">
+                <label class="beg-login-icon">
+                    <i class="layui-icon">&#xe642;</i>
+                </label>
+                <input type="password" name="psw" value="" autocomplete="off" placeholder="请输入登录密码" class="layui-input">
+            </div>
+            <div class="layui-form-item">
+                <label class="beg-login-icon">
+                    <i class="layui-icon">&#xe642;</i>
+                </label>
+                <input type="text" name="codeGoogle" autocomplete="false" placeholder="请输入验证码" style=" float:left; width: 60%" class="layui-input"/>
+                <img class="verify_code" style="width: 38%;height: 37px;float: right;" id="getCodeByG" src="/tools/getCaptcha" alt="captcha"><br/><br/>
+            </div>
+            <div class="layui-form-item">
+                <div class="beg-pull-right">
+                    <button id="submit-btn" class="layui-btn layui-btn-warm layui-btn-radius">
+                        <i class="layui-icon">&#xe650;</i> 登录
+                    </button>
+                </div>
+                <div class="beg-clear"></div>
+            </div>
         </form>
     </div>
-    <!-- End #login-content -->
+    <footer>
+        {{--<p>不爱吃鱼的猫、</p>--}}
+    </footer>
 </div>
 <!-- End #login-wrapper -->
 <div id="loading"></div>
-<script >
+<script>
     $(function () {
-        $('#submit-btn').click(function(){
+        $('#submit-btn').click(function () {
             var uname = $('input[name="userName"]').val();
             var psw = $('input[name="psw"]').val();
-
-            if (uname.length < 4 || psw.length < 6) {
-                alert('请输入正确的用户名和密码');
-                return false;
-            }
-            post('login',{uname: uname, psw: psw},function (data) {
-                if(data){
-                    if(200==data.code){
+            var codeGoogle = $('input[name="codeGoogle"]').val();
+            post('login', {uname: uname, psw: psw, codeGoogle: codeGoogle}, function (data) {
+                if (data) {
+                    if (200 == data.code) {
                         window.location.href = 'index';
-                    }else {
-                        alert('用户名或密码错误');
+                    } else {
+                        alert(data.msg);
                         return false;
                     }
                 } else {
@@ -98,7 +90,10 @@
                 }
             });
         });
-
+        //验证码
+        $("#getCodeByG").click(function(){
+            $(this).attr("src",'/tools/getCaptcha?' + Math.random());
+        });
     });
 
 </script>
