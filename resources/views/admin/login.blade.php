@@ -8,8 +8,8 @@
     <link rel="stylesheet" href="{{asset('plugin/layui/css/layui.css')}}" media="all"/>
     <link rel="stylesheet" href="{{asset('admin/css/login.css')}}"/>
     <!-- jQuery -->
-    <script type="text/javascript" src="{{ asset('admin/scripts/jquery.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('admin/scripts/http.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('admin/js/jquery.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('admin/js/http.js') }}"></script>
     <style>
         #loading {
             background-color: rgba(0, 0, 0, .5);
