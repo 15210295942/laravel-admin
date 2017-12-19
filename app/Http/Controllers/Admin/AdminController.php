@@ -47,7 +47,7 @@ class AdminController extends Controller
             throw new ParamsException('请输入用户名和密码');
         }
         if ($user = (new AdminModel())->checkPsw($userName, $psw)) {
-            $request->session()->put(self::ADMIN_SESSION_KEY, serialize($user));
+            $request->session()->put(self::ADMIN_SESSION_KEY, $user);//serialize($user)
 
             return $this->returnJson(ApiCode::SUCCESS, ['result' => true]);
         }

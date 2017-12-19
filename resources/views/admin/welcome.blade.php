@@ -4,8 +4,7 @@
 		<meta charset="UTF-8">
 		<title></title>
 		<link rel="stylesheet" href="{{asset('plugin/layui/css/layui.css')}}" media="all" />
-		<link rel="stylesheet" href="{{asset('static/css/main.css')}}" />
-        <link href="http://cdn.bootcss.com/animate.css/3.0.0/animate.min.css" rel="stylesheet">
+		<link rel="stylesheet" href="{{asset('admin/css/main.css')}}" />
 	</head>
 	<body>
 		<div class="admin-main animated fadeInUp">
