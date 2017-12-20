@@ -83,13 +83,7 @@ class AdminController extends Controller
     public function actionList(Request $request)
     {
         $user = $this->currentUser($request);
-        if (!in_array($user['type'], [AdminModel::TYPE_ADMIN])) {
-            throw new PermissionException('没有权限');
-        }
         $admins = (new AdminModel())->getAll();
-        foreach ($admins as &$u) {
-            $u['type'] = AdminModel::$types[$u['type']];
-        }
         return view('admin.adminList', ['user' => $user, 'list' => $admins]);
     }
 

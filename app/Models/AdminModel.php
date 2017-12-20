@@ -15,14 +15,6 @@ class AdminModel extends Model
     protected $hidden = [
         'psw',
     ];
-    const TYPE_ADMIN = 1;
-    const TYPE_OPERATE = 2;
-    const TYPE_FINANCE = 3;
-    public static $types = [
-        self::TYPE_ADMIN => '管理员',
-        self::TYPE_OPERATE => '操作员',
-        self::TYPE_FINANCE => '财务员'
-    ];
 
     /**
      * 检查用户名密码是否正确
@@ -44,6 +36,15 @@ class AdminModel extends Model
         return false;
     }
 
+    /**
+     * 获取全部信息
+     * @return array
+     */
+    public function getAll()
+    {
+        return $this->get()->toArray();
+    }
+
     public function resetPsw($uname, $oldPsw, $newPsw)
     {
         if (!$newPsw) {
@@ -56,10 +57,6 @@ class AdminModel extends Model
     }
 
 
-    public function getAll()
-    {
-        return $this->where([['isDeleted', static::NOT_DELETED]])->get()->toArray();
-    }
 
     public function getAdmin($id)
     {

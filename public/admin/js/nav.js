@@ -42,3 +42,16 @@ var navs = [
                 "spread": false
             }]
     }]
+
+var navs = [{
+    "title": "\u7ba1\u7406\u5458\u7ba1\u7406",
+    "icon": "icon-computer",
+    "href": "",
+    "spread": false,
+    "children": [{
+        "title": "\u7ba1\u7406\u5458\u5217\u8868",
+        "icon": "fa fa-user-circle-o",
+        "href": "\/admin\/adminList",
+        "spread": false
+    }, {"title": "\u83dc\u5355\u5217\u8868", "icon": "icon-text", "href": "\/admin\/adminList", "spread": false}]
+}];

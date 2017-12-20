@@ -36,7 +36,7 @@ class HomeController extends Controller
                 ];
             }
         }
-        return $jsonMenu;
+        return json_encode($jsonMenu);
     }
 
     //后台欢迎页

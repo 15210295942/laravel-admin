@@ -21,7 +21,7 @@
     <div class="layui-header header">
         <div class="layui-main">
             <a href="#" class="logo">后台管理</a>
-
+            <input type="hidden" id="menuList" value="{{ $menu }}"/>
             <div class="weather" pc>
                 <div id="tp-weather-widget"></div>
                 <script>
@@ -62,7 +62,7 @@
                         "hash": "14dff75e7253d3a8b9727522759f3455"
                     });
                     tpwidget("show");
-                    var navs = "{{ $menu }}";
+                    var navs = JSON.parse(document.getElementById('menuList').value);
                 </script>
             </div>
 
@@ -130,9 +130,7 @@
 <div class="site-tree-mobile layui-hide"><i class="layui-icon">&#xe602;</i></div>
 <div class="site-mobile-shade"></div>
 <script type="text/javascript" src="{{ asset('plugin/layui/layui.js') }}"></script>
-{{--<script type="text/javascript" src="{{ asset('admin/js/nav.js') }}"></script>--}}
 <script type="text/javascript" src="{{ asset('admin/js/leftNav.js') }}"></script>
-{{--<script type="text/javascript" src="{{ asset('admin/js/index.js') }}"></script>--}}
 <script type="text/javascript" src="/admin/js/index.js"></script>
 <script type="text/javascript" src="//idm-su.baidu.com/su.js"></script>
 </body>
