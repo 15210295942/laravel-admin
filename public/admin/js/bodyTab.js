@@ -71,6 +71,7 @@ layui.define(["element", "jquery"], function (exports) {
                 window.sessionStorage.setItem("menu", JSON.stringify(menu));
                 window.sessionStorage.setItem("curmenu", JSON.stringify(curmenu));
                 element.tabChange(tabFilter, that.getLayId(_this.find("cite").text()));
+                // element.tabChange(that.tabFilter, that.titleBox.find('li').length - 1);
             } else {
                 var curmenu = {
                     "icon": _this.find("i.iconfont").attr("data-icon") != undefined ? _this.find("i.iconfont").attr("data-icon") : _this.find("i.layui-icon").attr("data-icon"),

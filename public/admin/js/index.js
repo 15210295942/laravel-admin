@@ -77,6 +77,8 @@ layui.config(
         showNotice();
     })*/
     if (window.sessionStorage.getItem("menu") != null) {
+        //刷新前历史菜单
+        // console.log(window.sessionStorage.getItem("menu"))
         menu = JSON.parse(window.sessionStorage.getItem("menu"));
         curmenu = window.sessionStorage.getItem("curmenu");
         var openTitle = '';

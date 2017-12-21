@@ -10,10 +10,9 @@
 	<meta name="apple-mobile-web-app-status-bar-style" content="black">
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="format-detection" content="telephone=no">
-
 	<link rel="stylesheet" href="{{asset('plugin/layui/css/layui.css')}}" media="all" />
 	<link rel="stylesheet" href="{{asset('plugin/font-awesome/css/font-awesome.min.css')}}">
-	<link rel="stylesheet" href="{{asset('css/css.css')}}">
+{{--	<link rel="stylesheet" href="{{asset('css/css.css')}}">--}}
 </head>
 
 <body>
@@ -32,63 +31,36 @@
 		</ul>
 	</div>
 	<table class="layui-table">
-		<colgroup>
-			<col width="150">
-			<col width="150">
-			<col width="250">
-			<col>
-			<col  width="250">
-		</colgroup>
 		<thread>
 			<tr>
 				<th>ID</th>
 				<th>用户名</th>
-				<th>上次登录时间</th>
+				<th>头像</th>
+				{{--<th>上次登录时间</th>--}}
 				<th>上次登录IP</th>
-				<th>创建时间</th>
 				<th>操作 </th>
 			</tr>
 		</thread>
 		<tbody>
-		{{--{{ $admins }}--}}
-		@foreach($adminList as $admin)
+		@foreach($list as $admin)
 			<tr>
-				<td>{{$admin->ad_id}} </td>
-				<td>{{$admin->ad_userName}} </td>
-				<td>
-					@if($admin->ad_loginTime!=0)
-						{{ date('Y-m-d H:i:s', $admin->ad_loginTime)}}
-					@else
-						--
-					@endif
-				</td>
-				<td>{{$admin->ad_loginIp}}</td>
-				<td>
-					@if($admin->createTime!=0)
-						{{ date('Y-m-d H:i:s', $admin->createTime)}}
-					@else
-						--
-					@endif
-				</td>
+				<td>{{$admin['id']}} </td>
+				<td>{{$admin['userName']}} </td>
+				<td><img src="/uploads/photo/conle.jpg" width="50px" height="50px" /></td>
+				<td>{{$admin['loginIp']}}</td>
 				<td>
 
 					{{--<span data-id="{{$admin->ad_id}}" class="layui-btn layui-btn-mini editUser">编辑</span>--}}
 					{{--<span data-id="{{$admin->ad_id}}" class="layui-btn layui-btn-mini editPass">修改密码</span>--}}
-					<span data-id="{{$admin->ad_id}}" class="layui-btn layui-btn-danger del layui-btn-mini">删除</span>
+					<span data-id="{{$admin['id']}}" class="layui-btn layui-btn-danger del layui-btn-mini">删除</span>
 				</td>
 			</tr>
 		@endforeach
 		</tbody>
 	</table>
-	<div style="display:none;">
-		<script type="text/javascript">
-			var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");
-			document.write(unescape("%3Cspan id='cnzz_stat_icon_1262896806'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s19.cnzz.com/z_stat.php%3Fid%3D1262896806%26show%3Dpic1 ' type='text/javascript'%3E%3C/script%3E"));
-		</script>
-	</div>
 </div>
 <script type="text/javascript" src="{{asset('plugin/layui/layui.js')}}"></script>
-<script src="{{asset('static/js/common_admin.js')}}"></script>
+<script src="{{asset('admin/js/common_admin.js')}}"></script>
 <script>
     layui.use(['layer'],function () {
         var $ = layui.jquery,t = layui.jquery,e = layui.layer;
