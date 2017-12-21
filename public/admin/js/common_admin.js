@@ -77,7 +77,7 @@ layui.config({base: "../static/js/"}).extend({
     datatableSelect: "dataTables/extensions/Select/js/dataTables.select",
     datatableEditer: "dataTables/extensions/Editor/js/dataTables.editor.min"
 }), layui.use(["layer", "util", "element"], function () {
-    var t = layui.jquery, e = (layui.layer, layui.element(), layui.util);
+    var t = layui.jquery, e = (layui.layer, layui.element, layui.util);
     e.fixbar(), t(function () {
         t(".table-sort").on("click", ".btn-checkall", function () {
             t(".btn-checkall").prop("checked", this.checked), t('[type="checkbox"][name="sublist"]').prop("checked", this.checked)

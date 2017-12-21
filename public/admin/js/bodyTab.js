@@ -1,6 +1,6 @@
 var tabFilter, menu = [], liIndex, curNav, delMenu;
 layui.define(["element", "jquery"], function (exports) {
-    var element = layui.element(), $ = layui.jquery, layId, Tab = function () {
+    var element = layui.element, $ = layui.jquery, layId, Tab = function () {
         this.tabConfig = {closed: true, openTabNum: 10, tabFilter: "bodyTab"}
     };
     if ($(".navBar").html() == '') {
