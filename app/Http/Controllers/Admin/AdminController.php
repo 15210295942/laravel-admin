@@ -7,6 +7,7 @@ use App\Exceptions\PermissionException;
 use App\Http\Controllers\BaseController as Controller;
 use App\Libs\ApiCode;
 use App\Models\AdminModel;
+use App\Models\MenuModel;
 use Illuminate\Http\Request;
 use Exception;
 use Illuminate\Support\Facades\Log;
@@ -133,5 +134,17 @@ class AdminController extends Controller
             return $this->returnJson(ApiCode::SUCCESS, ['result' => true]);
         }
         throw new Exception('删除失败', ApiCode::BAD_REQUEST);
+    }
+
+
+    /**
+     * 菜单列表
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @throws PermissionException
+     */
+    public function actionMenuList()
+    {
+        $list = (new MenuModel())->getAll();
+        return view('admin.menuList', ['list' => $list]);
     }
 }

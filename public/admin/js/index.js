@@ -76,7 +76,7 @@ layui.config(
     $(".showNotice").on("click", function () {
         showNotice();
     })*/
-    /*if (window.sessionStorage.getItem("menu") != null) {
+    if (window.sessionStorage.getItem("menu") != null) {
         //刷新前历史菜单
         // console.log(window.sessionStorage.getItem("menu"))
         menu = JSON.parse(window.sessionStorage.getItem("menu"));
@@ -106,7 +106,7 @@ layui.config(
                 element.tabChange("bodyTab", menu[menu.length - 1].layId);
             }
         }
-    }*/
+    }
 })
 function addTab(_this) {
     tab.tabAdd(_this);

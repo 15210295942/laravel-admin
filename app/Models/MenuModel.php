@@ -14,4 +14,12 @@ class MenuModel extends Model
     {
         return $this->hasMany('App\Models\MenuModel', 'pid', 'id')->orderBy('sort', 'ASC');
     }
+    /**
+     * 获取全部信息
+     * @return array
+     */
+    public function getAll()
+    {
+        return $this->get()->toArray();
+    }
 }

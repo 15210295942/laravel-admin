@@ -61,6 +61,7 @@
 </div>
 <script type="text/javascript" src="{{asset('plugin/layui/layui.js')}}"></script>
 <script src="{{asset('admin/js/common_admin.js')}}"></script>
+<script src="{{asset('admin/js/adminList.js')}}"></script>
 <script>
     layui.use(['layer'],function () {
         var $ = layui.jquery,t = layui.jquery,e = layui.layer;
