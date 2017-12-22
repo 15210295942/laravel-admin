@@ -17,9 +17,9 @@ Route::group(['namespace' => 'Admin'], function () {
         Route::get('/welcome', 'HomeController@actionWelcome');//后台欢迎页
 
         //管理员管理
-        Route::match(['GET', 'POST'], '/userPswEdit/{id?}', 'AdminController@actionPswEdit');//修改密码
+        Route::match(['GET', 'POST'], '/adminPswEdit', 'AdminController@actionPswEdit');//修改密码
         Route::get('/list', "AdminController@actionList");//列表
-        Route::match(['GET', 'POST'], '/add', "AdminController@actionAdd");//添加
-        Route::get('/remove', "AdminController@actionRemove");//删除管理员
+        Route::match(['GET', 'POST'], '/adminAdd', "AdminController@actionAdd");//添加
+        Route::get('/adminRemove', "AdminController@actionRemove");//删除管理员
     });
 });

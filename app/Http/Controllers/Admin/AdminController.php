@@ -98,17 +98,14 @@ class AdminController extends Controller
     public function actionAdd(Request $request)
     {
         $user = $this->currentUser($request);
-        if (!in_array($user['type'], [AdminModel::TYPE_ADMIN])) {
-            throw new PermissionException('没有权限');
-        }
         if ($request->method() !== 'POST') {
-            return view('admin.adminAdd', ['user' => $user, 'types' => AdminModel::$types]);
+            return view('admin.adminAdd', ['user' => $user]);
         }
-        $uname = $request->input('uname');
-        $type = $request->input('type');
-        $psw = $request->input('psw');
+        $userName = $request->input('userName');
+        $userPhoto = $request->input('userPhoto');
+        $pswT = $request->input('pswT');
 
-        if ((new AdminModel())->addAdmin($uname, $type, $psw)) {
+        if ((new AdminModel())->addAdmin($userName, $userPhoto, $pswT)) {
             return $this->returnJson(ApiCode::SUCCESS, ['result' => true]);
         }
         throw new Exception('添加失败', ApiCode::BAD_REQUEST);

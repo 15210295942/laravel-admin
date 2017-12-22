@@ -45,6 +45,26 @@ class AdminModel extends Model
         return $this->get()->toArray();
     }
 
+    /**
+     * 添加管理员
+     * @param $userName
+     * @param $userPhoto
+     * @param $pswT
+     * @return bool
+     * @throws ParamsException
+     */
+    public function addAdmin($userName, $userPhoto, $pswT)
+    {
+        if ($this->unameExist($userName)) {
+            throw new ParamsException('用户名已存在');
+        }
+        return $this->insert([
+            'userName' => $userName,
+            'userPhoto' => $userPhoto,
+            'psw' => password_hash($pswT, PASSWORD_DEFAULT)
+        ]);
+    }
+
     public function resetPsw($uname, $oldPsw, $newPsw)
     {
         if (!$newPsw) {
@@ -64,21 +84,11 @@ class AdminModel extends Model
         return $result ? $result->toArray() : [];
     }
 
-    public function addAdmin($uname, $type, $psw)
-    {
-        if ($this->unameExist($uname)) {
-            throw new ParamsException('用户名已存在');
-        }
-        return $this->insert([
-            'uname' => $uname,
-            'type' => $type,
-            'psw' => password_hash($psw, PASSWORD_DEFAULT)
-        ]);
-    }
 
-    public function unameExist($uname)
+    //检查账号是否重复
+    public function unameExist($userName)
     {
-        return $this->where([['uname', $uname]])->count() > 0;
+        return $this->where([['userName', $userName]])->count() > 0;
     }
 
     public function deleteUser($id)

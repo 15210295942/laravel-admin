@@ -3,7 +3,7 @@
 
 <head>
 	<meta charset="utf-8">
-	<title>{{trans('admin/adminList.title')}}</title>
+	<title>{{ trans('blogCommon.web.title') }}</title>
 	<meta name="renderer" content="webkit">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -25,7 +25,7 @@
 			<li class="handle-item" style="float: right;margin-bottom: 5px">
                 <span class="fr">
                     <a class="layui-btn" id="refresh">刷新</a>
-				<button class="layui-btn addUserAdmin" >立即添加</button>
+				<button class="layui-btn adminAdd" >立即添加</button>
                 </span>
 			</li>
 		</ul>
@@ -46,7 +46,7 @@
 			<tr>
 				<td>{{$admin['id']}} </td>
 				<td>{{$admin['userName']}} </td>
-				<td><img src="/uploads/photo/conle.jpg" width="50px" height="50px" /></td>
+				<td><img src="{{ $admin['userPhoto'] }}" width="50px" height="50px" /></td>
 				<td>{{$admin['loginIp']}}</td>
 				<td>
 
@@ -62,42 +62,6 @@
 <script type="text/javascript" src="{{asset('plugin/layui/layui.js')}}"></script>
 <script src="{{asset('admin/js/common_admin.js')}}"></script>
 <script src="{{asset('admin/js/adminList.js')}}"></script>
-<script>
-    layui.use(['layer'],function () {
-        var $ = layui.jquery,t = layui.jquery,e = layui.layer;
-        var csrf_token =t('meta[name=csrf-token]').attr('content');
-
-        t(".handle-item").on("click", ".addUserAdmin", function () {
-            layer_show("添加", "/admin/userAdmin/create", "", "800", "600")
-        });
-        /*t(".layui-table").on("click", ".editUser", function () {
-            var id = t(this).attr('data-id');
-            layer_show("编辑", '/admin/userAdmin/'+id+'/edit', "", "800", "600")
-        });*/
-        /*t(".layui-table").on("click", ".editPass", function () {
-            var id = t(this).attr('data-id');
-            layer_show("修改密码", '/admin/userAdmin/userUpPassword/'+id, "", "800", "600")
-        });*/
-        t(".layui-table").on("click", ".del", function () {
-            var n = t(this);
-            var id = t(this).attr('data-id');
-            e.confirm("确认要删除吗？", {icon: 0, title: "警告", shade: !1}, function (a) {
-                $.ajax({
-                    url: '/admin/userAdmin/destroy',
-                    data: {'id': id},
-                    type: 'get',
-                    success: function (data) {
-                        layer.msg(data.messages);
-                        layer.close(index);
-                        return false;
-                    }
-                });
-                //$(n).parents("tr").remove(), e.msg("已删除!", {icon: 1, time: 1e3})
-            })
-        });
-
-	});
-</script>
 </body>
 
 </html>

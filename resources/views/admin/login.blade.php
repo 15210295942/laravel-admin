@@ -10,22 +10,6 @@
     <!-- jQuery -->
     <script type="text/javascript" src="{{ asset('admin/js/jquery.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('admin/js/http.js') }}"></script>
-    <style>
-        #loading {
-            background-color: rgba(0, 0, 0, .5);
-            position: fixed;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            z-index: 1;
-            background-image: url({{ asset('admin/images/loading.gif') }});
-            background-repeat: no-repeat;
-            background-position: center;
-            background-size: 50px;
-            display: none;
-        }
-    </style>
 </head>
 <body class="beg-login-bg">
 <div class="beg-login-box">

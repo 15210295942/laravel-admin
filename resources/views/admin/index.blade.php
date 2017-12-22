@@ -132,6 +132,6 @@
 <script type="text/javascript" src="{{ asset('plugin/layui/layui.js') }}"></script>
 <script type="text/javascript" src="{{ asset('admin/js/leftNav.js') }}"></script>
 <script type="text/javascript" src="/admin/js/index.js"></script>
-<script type="text/javascript" src="//idm-su.baidu.com/su.js"></script>
+{{--<script type="text/javascript" src="//idm-su.baidu.com/su.js"></script>--}}
 </body>
 </html>
