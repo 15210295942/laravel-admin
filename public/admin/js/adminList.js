@@ -62,11 +62,6 @@ layui.config({base: "js/"}).use(['form', 'layer', 'jquery', 'laypage'], function
             layer.msg("请输入需要查询的内容");
         }
     })*/ //搜索
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-    });
     $(".adminAdd").click(function () {
         var index = layui.layer.open({
             title: "添加管理员",
@@ -81,17 +76,19 @@ layui.config({base: "js/"}).use(['form', 'layer', 'jquery', 'laypage'], function
         })
         layui.layer.full(index);
     })
-    $(".recommend").click(function () {
-        var $checkbox = $(".news_list").find('tbody input[type="checkbox"]:not([name="show"])');
-        if ($checkbox.is(":checked")) {
-            var index = layer.msg('推荐中，请稍候', {icon: 16, time: false, shade: 0.8});
-            setTimeout(function () {
-                layer.close(index);
-                layer.msg("推荐成功");
-            }, 2000);
-        } else {
-            layer.msg("请选择需要推荐的文章");
-        }
+    $(".editUser").click(function () {
+        var index = layui.layer.open({
+            title: "添加管理员",
+            type: 2,
+            content: "adminAdd",
+            success: function (layero, index) {
+                layui.layer.tips('点击此处返回列表', '.layui-layer-setwin .layui-layer-close', {tips: 3});
+            }
+        })
+        $(window).resize(function () {
+            layui.layer.full(index);
+        })
+        layui.layer.full(index);
     })
     $("body").on("click", ".remove", function () {
         var _this = $(this);

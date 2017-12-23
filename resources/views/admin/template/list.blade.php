@@ -11,6 +11,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="format-detection" content="telephone=no">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="icon" href="/uploads/photo/favicon.ico">
     <link rel="stylesheet" href="{{asset('plugin/layui/css/layui.css')}}" media="all"/>
     <link rel="stylesheet" href="{{asset('plugin/font-awesome/css/font-awesome.min.css')}}">
@@ -26,10 +27,16 @@
     </div>
     @yield('table')
 </div>
-<script type="text/javascript" src="{{asset('plugin/layui/layui.js')}}"></script>
 {{--<script src="{{asset('admin/js/common_admin.js')}}"></script>--}}
 <script type="text/javascript" src="{{ asset('admin/js/jquery.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('admin/js/http.js') }}"></script>
+<script>
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+</script>
 </body>
 
 </html>

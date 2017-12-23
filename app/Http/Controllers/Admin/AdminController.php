@@ -118,7 +118,7 @@ class AdminController extends Controller
      * @throws Exception
      * @throws PermissionException
      */
-    public function actionDelete(Request $request)
+    public function actionRemove(Request $request)
     {
         $user = $this->currentUser($request);
         $id = $request->input('id');

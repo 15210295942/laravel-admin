@@ -21,7 +21,7 @@ class Upload
     private $error = ''; //上传错误信息
     private $fullPath = '';//绝对地址
     private $config = array(
-        'maxSize' => 3 * 1024 * 1024, //上传的文件大小限制 (0-不做限制)
+        'maxSize' => 0, //上传的文件大小限制 (0-不做限制)
         'exts' => array('jpg', 'jpeg', 'gif', 'png'), //允许上传的后缀
         'subName' => '', //子目录创建方式，[0]-函数名，[1]-参数，多个参数使用数组
         'rootPath' => '/uploads/photo', //保存根路径

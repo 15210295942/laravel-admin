@@ -32,7 +32,7 @@
                 <td>
 
                     <span data-id="{{$admin['id']}}" class="layui-btn layui-btn-mini editUser">编辑</span>
-                    <span data-id="{{$admin['id']}}" class="layui-btn layui-btn-mini editPass">修改密码</span>
+                    {{--<span data-id="{{$admin['id']}}" class="layui-btn layui-btn-mini editPass">修改密码</span>--}}
                     <span data-id="{{$admin['id']}}" class="layui-btn layui-btn-danger remove layui-btn-mini">删除</span>
                 </td>
             </tr>
@@ -40,4 +40,5 @@
         </tbody>
     </table>
 @endsection
+<script type="text/javascript" src="{{asset('plugin/layui/layui.js')}}"></script>
 <script src="{{asset('admin/js/adminList.js')}}"></script>
