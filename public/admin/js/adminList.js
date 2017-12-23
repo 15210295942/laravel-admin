@@ -62,6 +62,11 @@ layui.config({base: "js/"}).use(['form', 'layer', 'jquery', 'laypage'], function
             layer.msg("请输入需要查询的内容");
         }
     })*/ //搜索
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
     $(".adminAdd").click(function () {
         var index = layui.layer.open({
             title: "添加管理员",
@@ -88,15 +93,23 @@ layui.config({base: "js/"}).use(['form', 'layer', 'jquery', 'laypage'], function
             layer.msg("请选择需要推荐的文章");
         }
     })
-    $("body").on("click", ".news_del", function () {
+    $("body").on("click", ".remove", function () {
         var _this = $(this);
         layer.confirm('确定删除此信息？', {icon: 3, title: '提示信息'}, function (index) {
-            for (var i = 0; i < newsData.length; i++) {
-                if (newsData[i].newsId == _this.attr("data-id")) {
-                    newsData.splice(i, 1);
-                    newsList(newsData);
+            post('adminRemove', {id:_this.attr('data-id')}, function (data) {
+                if (data) {
+                    if (200 == data.code) {
+                        layer.msg('删除成功', {icon: 1, time: 2000});
+                        setTimeout(function(){
+                            window.location.href='/admin/list';
+                        },2000);
+                    } else {
+                        return layer.msg(data.msg);
+                    }
+                } else {
+                    return layer.msg('接口出错');
                 }
-            }
+            });
             layer.close(index);
         });
     })

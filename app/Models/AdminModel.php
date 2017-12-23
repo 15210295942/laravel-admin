@@ -65,6 +65,17 @@ class AdminModel extends Model
         ]);
     }
 
+    /**
+     * 删除管理员
+     * @param $id
+     * @return bool|null
+     * @throws \Exception
+     */
+    public function deleteUser($id)
+    {
+        return $this->where([['id', $id]])->delete();
+    }
+
     public function resetPsw($uname, $oldPsw, $newPsw)
     {
         if (!$newPsw) {
@@ -91,8 +102,4 @@ class AdminModel extends Model
         return $this->where([['userName', $userName]])->count() > 0;
     }
 
-    public function deleteUser($id)
-    {
-        return $this->where([['id', $id]])->delete();
-    }
 }

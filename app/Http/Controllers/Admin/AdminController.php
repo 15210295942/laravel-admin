@@ -121,13 +121,11 @@ class AdminController extends Controller
     public function actionDelete(Request $request)
     {
         $user = $this->currentUser($request);
-        if ($user['id'] == $request->input('id')) {
+        $id = $request->input('id');
+        if ($user['id'] == $id) {
             throw new Exception('不能删除自己', ApiCode::BAD_REQUEST);
         }
-        if (!in_array($user['type'], [AdminModel::TYPE_ADMIN])) {
-            throw new PermissionException('没有权限', ApiCode::BAD_REQUEST);
-        }
-        if ((new AdminModel())->deleteUser($request->input('id'))) {
+        if ((new AdminModel())->deleteUser($id)) {
             return $this->returnJson(ApiCode::SUCCESS, ['result' => true]);
         }
         throw new Exception('删除失败', ApiCode::BAD_REQUEST);

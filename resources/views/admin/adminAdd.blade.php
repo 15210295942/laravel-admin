@@ -122,7 +122,7 @@
                     if (200 == data.code) {
                         layer.msg('添加成功', {icon: 1, time: 2000});
                         setTimeout(function(){
-                            window.location.href='/admin/list';
+                            parent.window.location.href='/admin/list';
                         },2000);
                     } else {
                         return layer.msg(data.msg);
