@@ -15,6 +15,12 @@ use Illuminate\Support\Facades\Log;
 class AdminController extends Controller
 {
     const ADMIN_SESSION_KEY = 'adminUser';
+    private $adminModel;
+
+    public function __construct()
+    {
+        $this->adminModel = new AdminModel();
+    }
 
     /**
      * 登录页面
@@ -47,7 +53,7 @@ class AdminController extends Controller
         if (!$userName || !$psw) {
             throw new ParamsException('请输入用户名和密码');
         }
-        if ($user = (new AdminModel())->checkPsw($userName, $psw)) {
+        if ($user = $this->adminModel->checkPsw($userName, $psw)) {
             $request->session()->put(self::ADMIN_SESSION_KEY, $user);//serialize($user)
 
             return $this->returnJson(ApiCode::SUCCESS, ['result' => true]);
@@ -84,7 +90,7 @@ class AdminController extends Controller
     public function actionList(Request $request)
     {
         $user = $this->currentUser($request);
-        $admins = (new AdminModel())->getAll();
+        $admins = $this->adminModel->getAll();
         return view('admin.adminList', ['user' => $user, 'list' => $admins]);
     }
 
@@ -105,10 +111,33 @@ class AdminController extends Controller
         $userPhoto = $request->input('userPhoto');
         $pswT = $request->input('pswT');
 
-        if ((new AdminModel())->addAdmin($userName, $userPhoto, $pswT)) {
+        if ($this->adminModel->addAdmin($userName, $userPhoto, $pswT)) {
             return $this->returnJson(ApiCode::SUCCESS, ['result' => true]);
         }
         throw new Exception('添加失败', ApiCode::BAD_REQUEST);
+    }
+    /**
+     * 修改管理员
+     * @param Request $request
+     * @return array|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @throws Exception
+     * @throws PermissionException
+     */
+    public function actionEdit(Request $request)
+    {
+        $id = $request->input('id');
+        $detail = $this->adminModel->getDetailById($id);
+        if ($request->method() !== 'POST') {
+            return view('admin.adminEdit', ['detail' => $detail]);
+        }
+        $userName = $request->input('userName');
+        $userPhoto = $request->input('userPhoto');
+        $pswT = $request->input('pswT');
+
+        if ($this->adminModel->editAdmin($id, $userName, $userPhoto, $pswT)) {
+            return $this->returnJson(ApiCode::SUCCESS, ['result' => true]);
+        }
+        throw new Exception('修改失败', ApiCode::BAD_REQUEST);
     }
 
     /**

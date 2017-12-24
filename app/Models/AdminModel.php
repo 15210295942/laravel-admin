@@ -46,6 +46,17 @@ class AdminModel extends Model
     }
 
     /**
+     * 获取单个信息
+     * @param $id null
+     * @return array
+     */
+    public function getDetailById($id)
+    {
+        $detail = $this->where('id', $id)->first();
+        return $detail ? $detail->toArray() : [];
+    }
+
+    /**
      * 添加管理员
      * @param $userName
      * @param $userPhoto
@@ -63,6 +74,26 @@ class AdminModel extends Model
             'userPhoto' => $userPhoto,
             'psw' => password_hash($pswT, PASSWORD_DEFAULT)
         ]);
+    }
+
+    /**
+     * 修改管理员
+     * @param $id
+     * @param $userName
+     * @param $userPhoto
+     * @param $pswT
+     * @return bool
+     * @throws ParamsException
+     */
+    public function editAdmin($id, $userName, $userPhoto, $pswT){
+        if ($this->unameExist($userName, $id)) {
+            throw new ParamsException('用户名已存在');
+        }
+        $data = [];
+        $userName && $data['userName'] = $userName;
+        $userPhoto && $data['userPhoto'] = $userPhoto;
+        $pswT && $data['psw'] = password_hash($pswT, PASSWORD_DEFAULT);
+        return $this->where('id', $id)->update($data);
     }
 
     /**
@@ -88,7 +119,6 @@ class AdminModel extends Model
     }
 
 
-
     public function getAdmin($id)
     {
         $result = $this->where([['id', $id], ['isDeleted', static::NOT_DELETED]])->first();
@@ -97,9 +127,11 @@ class AdminModel extends Model
 
 
     //检查账号是否重复
-    public function unameExist($userName)
+    public function unameExist($userName, $id = '')
     {
-        return $this->where([['userName', $userName]])->count() > 0;
+        $where[] = ['userName', $userName];
+        $id && $where[] = ['userName', $userName];
+        return $this->where($where)->count() > 0;
     }
 
 }

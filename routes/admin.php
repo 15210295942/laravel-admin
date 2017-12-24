@@ -20,6 +20,7 @@ Route::group(['namespace' => 'Admin'], function () {
         Route::match(['GET', 'POST'], '/adminPswEdit', 'AdminController@actionPswEdit');//修改密码
         Route::get('/list', "AdminController@actionList");//列表
         Route::match(['GET', 'POST'], '/adminAdd', "AdminController@actionAdd");//添加
+        Route::match(['GET', 'POST'], '/adminEdit', "AdminController@actionEdit");//修改
         Route::post('/adminRemove', "AdminController@actionRemove");//删除管理员
     });
 });
