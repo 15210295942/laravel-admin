@@ -85,7 +85,8 @@ class AdminModel extends Model
      * @return bool
      * @throws ParamsException
      */
-    public function editAdmin($id, $userName, $userPhoto, $pswT){
+    public function editAdmin($id, $userName, $userPhoto, $pswT)
+    {
         if ($this->unameExist($userName, $id)) {
             throw new ParamsException('用户名已存在');
         }
@@ -130,7 +131,8 @@ class AdminModel extends Model
     public function unameExist($userName, $id = '')
     {
         $where[] = ['userName', $userName];
-        $id && $where[] = ['userName', $userName];
+        $id && $where[] = ['id', '!=', $id];
+        Log::info(json_encode($where));
         return $this->where($where)->count() > 0;
     }
 
