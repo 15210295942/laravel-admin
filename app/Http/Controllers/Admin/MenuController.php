@@ -9,17 +9,14 @@ use App\Libs\ApiCode;
 use App\Models\AdminModel;
 use App\Models\MenuModel;
 use Illuminate\Http\Request;
-use Exception;
-use Illuminate\Support\Facades\Log;
 
-class AdminController extends Controller
+class MenuController extends Controller
 {
-    const ADMIN_SESSION_KEY = 'adminUser';
-    private $adminModel;
+    private $menuModel;
 
     public function __construct()
     {
-        $this->adminModel = new AdminModel();
+        $this->menuModel = new MenuModel();
     }
 
     /**
@@ -158,5 +155,17 @@ class AdminController extends Controller
             return $this->returnJson(ApiCode::SUCCESS, ['result' => true]);
         }
         throw new Exception('删除失败', ApiCode::BAD_REQUEST);
+    }
+
+
+    /**
+     * 菜单列表
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @throws PermissionException
+     */
+    public function actionMenuList()
+    {
+        $list = (new MenuModel())->getAll();
+        return view('admin.menuList', ['list' => $list]);
     }
 }

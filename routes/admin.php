@@ -22,5 +22,11 @@ Route::group(['namespace' => 'Admin'], function () {
         Route::match(['GET', 'POST'], '/adminAdd', "AdminController@actionAdd");//添加
         Route::match(['GET', 'POST'], '/adminEdit', "AdminController@actionEdit");//修改
         Route::post('/adminRemove', "AdminController@actionRemove");//删除管理员
+
+        //菜单管理
+        Route::get('/menu/list', "MenuController@actionMenuList");//列表
+        Route::match(['GET', 'POST'], '/menu/add', "MenuController@actionAdd");//添加
+        Route::match(['GET', 'POST'], '/menu/edit', "MenuController@actionEdit");//修改
+        Route::post('/menu/remove', "MenuController@actionRemove");//删除管理员
     });
 });
