@@ -39,7 +39,9 @@
                         "uid": "UC1AEC9E02",
                         "hash": "40fc81924542888fcfeaa6c8acabd406"
                     });
-                    tpwidget("show");</script>
+                    tpwidget("show");
+                    var navs = JSON.parse(document.getElementById('menuList').value);
+                </script>
             </div>
 
             <ul class="layui-nav top_menu">
