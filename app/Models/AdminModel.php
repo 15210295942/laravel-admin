@@ -69,7 +69,7 @@ class AdminModel extends Model
         if ($this->unameExist($userName)) {
             throw new ParamsException('用户名已存在');
         }
-        return $this->insert([
+        return $this->insertGetId([
             'userName' => $userName,
             'userPhoto' => $userPhoto,
             'psw' => password_hash($pswT, PASSWORD_DEFAULT)

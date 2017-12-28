@@ -38,6 +38,33 @@
             </div>
         </div>
         <div class="layui-form-item">
+            <label class="layui-form-label"><span style="color: red">*</span>权限分配</label>
+            <div class="layui-input-block">
+                @if($menuList)
+                    @foreach($menuList as $key => $v)
+                        <ul class="nofloat" style="overflow:hidden;width:25%;float: left">
+                            <li class="left w25pre h36 checkBoxId" value="{{ $v['id'] }}">
+                                <input type="checkbox" name="checkMenu" value="{{ $v['id'] }}">
+                                <label for="brand_{{ $v['id'] }}">{{ $v['display_name'] }}</label>
+                            </li>
+                        </ul>
+                        @if($v['has_many_child_menu'])
+                            @foreach($v['has_many_child_menu'] as $k => $value)
+                                <ul class="nofloat" style="overflow:hidden;width:25%;float: left">
+                                    <li class="left w25pre h36 checkBoxId" value="{{ $value['id'] }}">
+                                        <input type="checkbox" name="checkMenu" value="{{ $value['id'] }}">
+                                        <label for="brand_{{ $value['id'] }}">{{ $value['display_name'] }}</label>
+                                    </li>
+                                </ul>
+                            @endforeach
+                        @endif
+                    @endforeach
+                @else
+                    暂无数据
+                @endif
+            </div>
+        </div>
+        <div class="layui-form-item">
             <div class="layui-input-block">
                 <button class="layui-btn" lay-submit="" lay-filter="demo1">提交</button>
             </div>

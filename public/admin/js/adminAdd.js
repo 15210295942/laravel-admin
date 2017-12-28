@@ -47,6 +47,11 @@ layui.config({base: "js/"}).use(['form', 'layer', 'jquery', 'upload'], function 
     });
     //监听提交
     form.on('submit(demo1)', function (data) {
+        var menu = '';
+        $("input[name='checkMenu']:checked").each(function () {
+            menu += this.value+',';
+        })
+        data.field.menu = menu;
         post('adminAdd', data.field, function (data) {
             if (data) {
                 if (200 == data.code) {

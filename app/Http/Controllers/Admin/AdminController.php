@@ -7,6 +7,8 @@ use App\Exceptions\PermissionException;
 use App\Http\Controllers\BaseController as Controller;
 use App\Libs\ApiCode;
 use App\Models\AdminModel;
+use App\Models\MenuModel;
+use App\Models\PowerModel;
 use Illuminate\Http\Request;
 use Exception;
 use Illuminate\Support\Facades\Log;
@@ -46,7 +48,7 @@ class AdminController extends Controller
         $psw = $request->input('psw');
         $codeGoogle = $request->input('codeGoogle');
         $checkCodeGoogle = $request->session()->get('codeGoogle');
-        if($codeGoogle != $checkCodeGoogle){
+        if ($codeGoogle != $checkCodeGoogle) {
             throw new ParamsException('请输入正确的验证码');
         }
         if (!$userName || !$psw) {
@@ -104,17 +106,26 @@ class AdminController extends Controller
     {
         $user = $this->currentUser($request);
         if ($request->method() !== 'POST') {
-            return view('admin.adminAdd', ['user' => $user]);
+            $menuList = (new MenuModel())->with('hasManyChildMenu')->where('type', 1)->where('pid', 0)->get()->toArray();
+            return view('admin.adminAdd', ['user' => $user, 'menuList' => $menuList]);
         }
         $userName = $request->input('userName');
         $userPhoto = $request->input('userPhoto');
         $pswT = $request->input('pswT');
+        $menu = $request->input('menu');
+        if (!$menu) {
+            throw new Exception('请选择权限', ApiCode::BAD_REQUEST);
+        }
 
-        if ($this->adminModel->addAdmin($userName, $userPhoto, $pswT)) {
+        $id = $this->adminModel->addAdmin($userName, $userPhoto, $pswT);
+        if ($id) {
+            $powerModel = new PowerModel();
+            $powerModel->add($id, $menu);
             return $this->returnJson(ApiCode::SUCCESS, ['result' => true]);
         }
         throw new Exception('添加失败', ApiCode::BAD_REQUEST);
     }
+
     /**
      * 修改管理员
      * @param Request $request
@@ -132,8 +143,13 @@ class AdminController extends Controller
         $userName = $request->input('userName');
         $userPhoto = $request->input('userPhoto');
         $pswT = $request->input('pswT');
-
+        $menu = $request->input('menu');
+        if (!$menu) {
+            throw new Exception('请选择权限', ApiCode::BAD_REQUEST);
+        }
         if ($this->adminModel->editAdmin($id, $userName, $userPhoto, $pswT)) {
+            $powerModel = new PowerModel();
+            $powerModel->edit($id, $menu);
             return $this->returnJson(ApiCode::SUCCESS, ['result' => true]);
         }
         throw new Exception('修改失败', ApiCode::BAD_REQUEST);
@@ -154,6 +170,7 @@ class AdminController extends Controller
             throw new Exception('不能删除自己', ApiCode::BAD_REQUEST);
         }
         if ((new AdminModel())->deleteUser($id)) {
+            (new PowerModel())->deleteId($id);
             return $this->returnJson(ApiCode::SUCCESS, ['result' => true]);
         }
         throw new Exception('删除失败', ApiCode::BAD_REQUEST);
