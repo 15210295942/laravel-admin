@@ -15,6 +15,9 @@
     <link rel="stylesheet" href="{{ asset('admin/css/font_eolqem241z66flxr.css') }}" media="all"/>
     <link rel="stylesheet" href="{{ asset('admin/css/main.css') }}" media="all"/>
 </head>
+<style>
+    .container_3c6APS_.textCenter_1KzIPcR.weakText_3WcXGdI.baseText_dqsVpMD.copyright_2Ob_0Cg{display: none}
+</style>
 <body class="main_body">
 <div class="layui-layout layui-layout-admin">
 
@@ -23,47 +26,20 @@
             <a href="#" class="logo">后台管理</a>
             <input type="hidden" id="menuList" value="{{ $menu }}"/>
             <div class="weather" pc>
-                <div id="tp-weather-widget"></div>
-                <script>
-                    (function (T, h, i, n, k, P, a, g, e) {
-                        g = function () {
-                            P = h.createElement(i);
-                            a = h.getElementsByTagName(i)[0];
-                            P.src = k;
-                            P.charset = "utf-8";
-                            P.async = 1;
-                            a.parentNode.insertBefore(P, a)
-                        };
-                        T["ThinkPageWeatherWidgetObject"] = n;
-                        T[n] || (T[n] = function () {
-                            (T[n].q = T[n].q || []).push(arguments)
-                        });
-                        T[n].l = +new Date();
-                        if (T.attachEvent) {
-                            T.attachEvent("onload", g)
-                        } else {
-                            T.addEventListener("load", g, false)
-                        }
-                    }(window, document, "script", "tpwidget", "//widget.seniverse.com/widget/chameleon.js"))
-                </script>
-                <script>
-                    tpwidget("init", {
-                        "flavor": "slim",
-                        "location": "WX4FBXXFKE4F",
+                <script>(function(T,h,i,n,k,P,a,g,e){g=function(){P=h.createElement(i);a=h.getElementsByTagName(i)[0];P.src=k;P.charset="utf-8";P.async=1;a.parentNode.insertBefore(P,a)};T["ThinkPageWeatherWidgetObject"]=n;T[n]||(T[n]=function(){(T[n].q=T[n].q||[]).push(arguments)});T[n].l=+new Date();if(T.attachEvent){T.attachEvent("onload",g)}else{T.addEventListener("load",g,false)}}(window,document,"script","tpwidget","//widget.seniverse.com/widget/chameleon.js"))</script>
+                <script>tpwidget("init", {
+                        "flavor": "bubble",
+                        "location": "WTW3SJ5ZBJUY",
                         "geolocation": "disabled",
+                        "position": "top-left",
+                        "margin": "3px 138px",
                         "language": "zh-chs",
                         "unit": "c",
                         "theme": "chameleon",
-                        "container": "tp-weather-widget",
-                        "bubble": "disabled",
-                        "alarmType": "badge",
-                        "color": "#FFFFFF",
-                        "uid": "U9EC08A15F",
-                        "hash": "14dff75e7253d3a8b9727522759f3455"
+                        "uid": "UC1AEC9E02",
+                        "hash": "40fc81924542888fcfeaa6c8acabd406"
                     });
-                    tpwidget("show");
-                    var navs = JSON.parse(document.getElementById('menuList').value);
-                </script>
+                    tpwidget("show");</script>
             </div>
 
             <ul class="layui-nav top_menu">
