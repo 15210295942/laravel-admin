@@ -4,7 +4,7 @@ layui.config({base: "js/"}).use(['form', 'layer', 'jquery', 'laypage'], function
         var index = layui.layer.open({
             title: "添加菜单",
             type: 2,
-            content: "menu/add",
+            content: "/admin/menu/add",
             success: function (layero, index) {
                 layui.layer.tips('返回列表', '.layui-layer-setwin .layui-layer-close', {tips: 3});
             }
@@ -17,9 +17,9 @@ layui.config({base: "js/"}).use(['form', 'layer', 'jquery', 'laypage'], function
     $(".editMenu").click(function () {
         var id = $(this).attr('data-id');
         var index = layui.layer.open({
-            title: "修改管理员",
+            title: "修改菜单",
             type: 2,
-            content: "menu/edit?id=" + id,
+            content: "/admin/menu/edit?id=" + id,
             success: function (layero, index) {
                 layui.layer.tips('返回列表', '.layui-layer-setwin .layui-layer-close', {tips: 3});
             }
@@ -32,12 +32,12 @@ layui.config({base: "js/"}).use(['form', 'layer', 'jquery', 'laypage'], function
     $("body").on("click", ".remove", function () {
         var _this = $(this);
         layer.confirm('确定删除此信息？', {icon: 3, title: '提示信息'}, function (index) {
-            post('menu/remove', {id: _this.attr('data-id')}, function (data) {
+            post('/admin/menu/remove', {id: _this.attr('data-id')}, function (data) {
                 if (data) {
                     if (200 == data.code) {
                         layer.msg('删除成功', {icon: 1, time: 2000});
                         setTimeout(function () {
-                            window.location.href = 'menu/list';
+                            location.href = '/admin/menu/list';
                         }, 2000);
                     } else {
                         return layer.msg(data.msg);

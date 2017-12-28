@@ -2,8 +2,9 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>{{ trans('blogCommon.web.title') }}</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>不爱吃鱼的猫</title>
+    <link rel="icon" href="/uploads/photo/favicon.ico">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <link rel="stylesheet" href="{{asset('plugin/layui/css/layui.css')}}" media="all"/>
     <link rel="stylesheet" href="{{asset('admin/css/login.css')}}"/>
@@ -55,6 +56,11 @@
 <!-- End #login-wrapper -->
 <div id="loading"></div>
 <script>
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
     $(function () {
         $('#submit-btn').click(function () {
             var uname = $('input[name="userName"]').val();

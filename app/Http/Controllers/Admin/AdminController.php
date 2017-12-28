@@ -7,7 +7,6 @@ use App\Exceptions\PermissionException;
 use App\Http\Controllers\BaseController as Controller;
 use App\Libs\ApiCode;
 use App\Models\AdminModel;
-use App\Models\MenuModel;
 use Illuminate\Http\Request;
 use Exception;
 use Illuminate\Support\Facades\Log;

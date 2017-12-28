@@ -16,8 +16,8 @@
             <tr>
                 <th>ID</th>
                 <th>用户名</th>
-                <th>头像</th>
-                {{--<th>上次登录时间</th>--}}
+                {{--<th>头像</th>--}}
+                <th>上次登录时间</th>
                 <th>上次登录IP</th>
                 <th>操作</th>
             </tr>
@@ -27,7 +27,8 @@
             <tr>
                 <td>{{$admin['id']}} </td>
                 <td>{{$admin['userName']}} </td>
-                <td><img src="{{ $admin['userPhoto'] }}" width="50px" height="50px"/></td>
+                {{--                <td><img src="{{ $admin['userPhoto'] }}" width="50px" height="50px"/></td>--}}
+                <td>{{ $admin['loginTime']?date('Y-m-d H:i:s', $admin['loginTime']):'-' }}</td>
                 <td>{{$admin['loginIp']}}</td>
                 <td>
 

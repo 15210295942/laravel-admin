@@ -19,6 +19,7 @@
                 <th>别名</th>
                 <th>描述</th>
                 <th>图标</th>
+                <th>排序</th>
                 <th>父级ID</th>
                 <th>操作</th>
             </tr>
