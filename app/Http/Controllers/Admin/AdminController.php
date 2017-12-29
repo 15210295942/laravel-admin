@@ -56,7 +56,6 @@ class AdminController extends Controller
         }
         if ($user = $this->adminModel->checkPsw($userName, $psw)) {
             $request->session()->put(self::ADMIN_SESSION_KEY, $user);//serialize($user)
-
             return $this->returnJson(ApiCode::SUCCESS, ['result' => true]);
         }
         throw new ParamsException('用户名或密码错误');
@@ -150,12 +149,12 @@ class AdminController extends Controller
         if (!$menu) {
             throw new Exception('请选择权限', ApiCode::BAD_REQUEST);
         }
-        if ($this->adminModel->editAdmin($id, $userName, $userPhoto, $pswT)) {
-            $powerModel = new PowerModel();
-            $powerModel->edit($id, $menu);
-            return $this->returnJson(ApiCode::SUCCESS, ['result' => true]);
-        }
-        throw new Exception('修改失败', ApiCode::BAD_REQUEST);
+        $this->adminModel->editAdmin($id, $userName, $userPhoto, $pswT);
+        $powerModel = new PowerModel();
+        $powerModel->edit($id, $menu);
+        return $this->returnJson(ApiCode::SUCCESS, ['result' => true]);
+
+        //throw new Exception('修改失败', ApiCode::BAD_REQUEST);
     }
 
     /**

@@ -31,7 +31,8 @@ class AdminModel extends Model
         }
 
         if (password_verify($psw, $user->psw)) {
-            return $user->toArray();
+            $ret = $this->where('id', $user->id)->update(['loginIp' => $this->getIp(), 'loginTime' => time()]);
+            return $ret ? $user->toArray() : false;
         }
         return false;
     }
@@ -132,7 +133,6 @@ class AdminModel extends Model
     {
         $where[] = ['userName', $userName];
         $id && $where[] = ['id', '!=', $id];
-        Log::info(json_encode($where));
         return $this->where($where)->count() > 0;
     }
 
