@@ -9,20 +9,31 @@ class CategoryModel extends Model
 
     protected $table = 'category';
 
-    //子集
+    /**
+     * 子集
+     */
     public function hasManyCate()
     {
         return $this->hasMany('App\Models\CategoryModel', 'pid', 'id')->orderBy('id', 'ASC');
     }
 
-    public function add($id, $menu)
+    /**
+     * 获取顶级
+     * @return array
+     */
+    public function getTopCate()
     {
-        $menuList = explode(',', $menu);
-        foreach ($menuList as $v) {
-            if ($v)
-                $this->insert(['adminId' => $id, 'menuId' => $v]);
-        }
-        return true;
+        return $this->where('pid', 0)->get()->toArray();
+    }
+
+    public function add($name, $description, $pid)
+    {
+        $data['createTime'] = time();
+        $name && $data['name'] = $name;
+        $description && $data['description'] = $description;
+        $pid && $data['pid'] = $pid;
+
+        return $this->insert($data);
     }
 
     public function edit($id, $menu)

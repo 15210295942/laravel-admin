@@ -25,7 +25,8 @@ class CategoryController extends Controller
      */
     public function actionList()
     {
-        $list = $this->cateModel->with('hasManyCate')->where('pid', 0)->get();
+        $list = $this->cateModel->with('hasManyCate')->where('pid', 0)->get()->toArray();
+
         return view('admin.categoryList', ['list' => $list]);
     }
 
@@ -39,18 +40,14 @@ class CategoryController extends Controller
     public function actionAdd(Request $request)
     {
         if ($request->method() !== 'POST') {
-            $topMenu = $this->menuModel->getTopMenu();
-            return view('admin.menuAdd', ['topMenu' => $topMenu]);
+            $topCate = $this->cateModel->getTopCate();
+            return view('admin.categoryAdd', ['topCate' => $topCate]);
         }
-        $path = $request->input('path');
-        $displayName = $request->input('display_name');
+        $name = $request->input('name');
         $description = $request->input('description');
         $pid = $request->input('pid');
-        $icon = $request->input('icon');
-        $sort = $request->input('sort');
-        $type = $request->input('type', 1);
 
-        if ($this->menuModel->addMenu($path, $displayName, $description, $pid, $icon, $sort, $type)) {
+        if ($this->cateModel->add($name, $description, $pid)) {
             return $this->returnJson(ApiCode::SUCCESS, ['result' => true]);
         }
         throw new Exception('添加失败', ApiCode::BAD_REQUEST);
