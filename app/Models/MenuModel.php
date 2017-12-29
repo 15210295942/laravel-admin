@@ -62,7 +62,8 @@ class MenuModel extends Model
         $detail = $this->where('id', $id)->first();
         if ($detail) {
             $detail = $detail->toArray();
-            $detail['parent'] = $this->where('id', $detail['pid'])->first()->toArray();
+            $parent = $this->where('id', $detail['pid'])->first();
+            $detail['parent'] = $parent ? $parent->toArray() : [];
         }
         return $detail ?: [];
     }

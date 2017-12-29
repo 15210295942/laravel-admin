@@ -138,7 +138,10 @@ class AdminController extends Controller
         $id = $request->input('id');
         $detail = $this->adminModel->getDetailById($id);
         if ($request->method() !== 'POST') {
-            return view('admin.adminEdit', ['detail' => $detail]);
+            $menuList = (new MenuModel())->with('hasManyChildMenu')->where('type', 1)->where('pid', 0)->get()->toArray();
+            $menuMy = (new PowerModel())->where('adminId', $id)->get()->toArray();
+            $menuMy = array_column($menuMy, 'menuId');
+            return view('admin.adminEdit', ['detail' => $detail, 'menuList' => $menuList, 'menuMy' => $menuMy]);
         }
         $userName = $request->input('userName');
         $userPhoto = $request->input('userPhoto');

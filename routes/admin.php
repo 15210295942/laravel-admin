@@ -27,6 +27,17 @@ Route::group(['namespace' => 'Admin'], function () {
         Route::get('/menu/list', "MenuController@actionMenuList");//列表
         Route::match(['GET', 'POST'], '/menu/add', "MenuController@actionAdd");//添加
         Route::match(['GET', 'POST'], '/menu/edit', "MenuController@actionEdit");//修改
-        Route::post('/menu/remove', "MenuController@actionRemove");//删除管理员
+        Route::post('/menu/remove', "MenuController@actionRemove");//删除
+
+        //博客管理
+        Route::get('/blog/list', "BlogController@actionBlogList");//列表
+        Route::match(['GET', 'POST'], '/blog/add', "BlogController@actionAdd");//添加
+        Route::match(['GET', 'POST'], '/blog/edit', "BlogController@actionEdit");//修改
+        Route::post('/blog/remove', "BlogController@actionRemove");//删除
+        //分类管理
+        Route::get('/category/list', "CategoryController@actionList");//列表
+        Route::match(['GET', 'POST'], '/category/add', "CategoryController@actionAdd");//添加
+        Route::match(['GET', 'POST'], '/category/edit', "CategoryController@actionEdit");//修改
+        Route::post('/category/remove', "CategoryController@actionRemove");//删除
     });
 });
