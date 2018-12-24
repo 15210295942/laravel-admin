@@ -2,9 +2,8 @@
 /**
  * 后台路由
  */
-use \Illuminate\Http\Request;
 
-Route::group(['namespace' => 'Admin'], function () {
+Route::group(['prefix'=>'admin','namespace' => 'Admin'], function () {
     //不需要登录的
     Route::match(['GET', 'POST'], '/login', 'AdminController@actionLogin')->name('adminLogin');//后台登录
     Route::match(['GET'], '/logout', function (Request $request) {//退出登录
@@ -39,5 +38,8 @@ Route::group(['namespace' => 'Admin'], function () {
         Route::match(['GET', 'POST'], '/category/add', "CategoryController@actionAdd");//添加
         Route::match(['GET', 'POST'], '/category/edit', "CategoryController@actionEdit");//修改
         Route::post('/category/remove', "CategoryController@actionRemove");//删除
+
+        //订单管理
+        Route::get('/order/lists', "OrderController@actionList");//列表
     });
 });

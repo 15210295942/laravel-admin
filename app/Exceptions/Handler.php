@@ -47,20 +47,20 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
-        //return parent::render($request, $exception);
-        if ($request->ajax()) {
-
-            if ($exception instanceof ValidationException) {
-                return $exception->response;
-            }
-            $code = $exception->getCode() ?: ApiCode::BAD_REQUEST;
-            $msg = $exception->getMessage() ?: '请求出错';
-            Log::error('异常：' . $exception->getMessage());
-            return (new Response())->setContent(['code' => $code, 'msg' => $msg]);
-        }
-        $message = $exception->getMessage();
-        $code = $exception->getCode() ?: 500;
-        return new Response($this->getHtml($message), $code);
+        return parent::render($request, $exception);
+//        if ($request->ajax()) {
+//
+//            if ($exception instanceof ValidationException) {
+//                return $exception->response;
+//            }
+//            $code = $exception->getCode() ?: ApiCode::BAD_REQUEST;
+//            $msg = $exception->getMessage() ?: '请求出错';
+//            Log::error('异常：' . $exception->getMessage());
+//            return (new Response())->setContent(['code' => $code, 'msg' => $msg]);
+//        }
+//        $message = $exception->getMessage();
+//        $code = $exception->getCode() ?: 500;
+//        return new Response($this->getHtml($message), $code);
     }
 
     /**

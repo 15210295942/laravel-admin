@@ -58,5 +58,6 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'blog.login' => \App\Http\Middleware\BlogLogin::class,
         'admin.login' => \App\Http\Middleware\AdminLogin::class,
+        'api.token'=>\App\Http\Middleware\ApiCkeckToken::class,
     ];
 }

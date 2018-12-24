@@ -27,7 +27,7 @@ class HomeController extends Controller
     //处理菜单
     private function handleMenu($menuPList, $menuIds)
     {
-        $jsonMenu = '';
+        $jsonMenu = [];
         foreach ($menuPList as $k => $v) {
             $jsonMenu[$k]['title'] = $v['display_name'];
             $jsonMenu[$k]['icon'] = $v['icon'];

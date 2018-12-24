@@ -6,5 +6,5 @@ return [
     'leftNav.portfolio' => 'Portfolio',
     'leftNav.about' => 'About',
     'leftNav.contact' => 'Contact',
-    'web.title' => '不爱吃鱼的猫',
+    'web.title' => 'xc管理后台',
 ];
